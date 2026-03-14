@@ -133,6 +133,16 @@ summary = agent.summarize()
 print(summary.answer)
 ```
 
+### Streamlit UI
+
+```bash
+# Ensure requirements are installed
+pip install -r requirements.txt
+
+# Run the UI
+streamlit run ui/app.py
+```
+
 ## Configuration
 
 All settings are managed via environment variables or `.env` file. See `.env.example` for the full list.
