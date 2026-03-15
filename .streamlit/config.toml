@@ -1,0 +1,3 @@
+[theme]
+# Force Streamlit's primary theme color to be blue instead of its default red/pink
+primaryColor="#1A73E8"
