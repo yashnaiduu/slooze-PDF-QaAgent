@@ -1,35 +1,20 @@
 import sys
 from pathlib import Path
 
-# Add project root to sys.path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import streamlit as st
 import requests
+from ui.styles import load_css
 
 API_URL = "http://localhost:8001"
 
 st.set_page_config(page_title="PDF AI Assistant", layout="wide", page_icon="📄")
 
-# --- Custom Default Streamlit Styling Fix ---
-st.markdown("""
-<style>
-    /* Remove red hover from buttons */
-    .stButton > button[kind="primary"]:hover {
-        border-color: #AECBFA !important;
-        background-color: #1B66C9 !important;
-        color: white !important;
-    }
-    
-    .stButton > button[kind="secondary"]:hover {
-        border-color: #AECBFA !important;
-        color: #1A73E8 !important;
-    }
-</style>
-""", unsafe_allow_html=True)
+st.markdown(load_css(), unsafe_allow_html=True)
 
-st.title("📄 PDF AI Assistant")
-st.markdown("Upload a PDF in the sidebar, then ask questions about its content here.")
+st.markdown('<div class="agent-header">📄 PDF AI Assistant</div>', unsafe_allow_html=True)
+st.markdown('<div class="agent-subtitle">Extract insights and ask questions about your documents</div>', unsafe_allow_html=True)
 
 # --- Sidebar for Document Management ---
 with st.sidebar:
@@ -51,32 +36,24 @@ with st.sidebar:
                     st.error(f"❌ Error processing document: {e}")
     
     st.divider()
-    
-    # Clear Chat Button
+
     st.header("💬 Chat Controls")
     if st.button("Clear Chat History", use_container_width=True):
         st.session_state.messages = []
         st.rerun()
 
-# --- Main Chat Interface ---
-# Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat messages from history on app rerun
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# React to user input
 if prompt := st.chat_input("Ask a question about your PDF (Press Enter to send)..."):
-    # Display user message in chat message container
     with st.chat_message("user"):
         st.markdown(prompt)
-    # Add user message to chat history
     st.session_state.messages.append({"role": "user", "content": prompt})
 
-    # Assistant response
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             try:
@@ -86,7 +63,6 @@ if prompt := st.chat_input("Ask a question about your PDF (Press Enter to send).
                 answer = data.get("answer", "No answer found.")
                 
                 st.markdown(answer)
-                # Add assistant response to chat history
                 st.session_state.messages.append({"role": "assistant", "content": answer})
                 
             except requests.exceptions.RequestException as e:

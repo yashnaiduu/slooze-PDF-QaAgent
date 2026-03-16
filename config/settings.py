@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     LLM_TEMPERATURE: float = 0.1
     LLM_MAX_TOKENS: int = 2048
 
-    OPENAI_API_KEY: str = ""
+    GROQ_API_KEY: str = ""
     OPENAI_BASE_URL: str = ""
     ANTHROPIC_API_KEY: str = ""
     OLLAMA_BASE_URL: str = "http://localhost:11434"

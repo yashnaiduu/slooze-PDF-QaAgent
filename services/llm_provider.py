@@ -18,7 +18,7 @@ class OpenAIProvider(LLMProvider):
     def __init__(self):
         from openai import OpenAI
 
-        kwargs = {"api_key": settings.OPENAI_API_KEY}
+        kwargs = {"api_key": settings.GROQ_API_KEY}
         if settings.OPENAI_BASE_URL:
             kwargs["base_url"] = settings.OPENAI_BASE_URL
         self._client = OpenAI(**kwargs)
