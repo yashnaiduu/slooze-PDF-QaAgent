@@ -81,23 +81,17 @@ Copy `.env.example` to `.env` and fill in the required values:
 
 ## 🚀 How to Run
 
-To run the application, you need to start **two separate terminal windows**.
+To run the application, simply execute the included orchestrator script. This will start both the FastAPI backend and Streamlit UI simultaneously in the same terminal.
 
-### 1. Start the Backend API Server
-In your first terminal, activate the environment and start the FastAPI server:
 ```bash
 source venv/bin/activate
-uvicorn api.server:app --host 0.0.0.0 --port 8001
+python run.py
 ```
-*The backend API will start on `http://localhost:8001`.*
 
-### 2. Start the Frontend UI
-In your second terminal, activate the environment and start the Streamlit UI:
-```bash
-source venv/bin/activate
-streamlit run ui/app.py
-```
-*The Streamlit web interface will open in your browser at `http://localhost:8501`. Upload a PDF in the sidebar to begin analyzing it!*
+* The backend API will start on `http://localhost:8001`
+* The Streamlit UI will open at `http://localhost:8501`
+
+To stop the agent, press `Ctrl+C` in the terminal to gracefully shut down both services.
 
 ## Example Usage
 
