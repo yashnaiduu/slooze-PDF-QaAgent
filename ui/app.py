@@ -16,7 +16,7 @@ st.markdown(load_css(), unsafe_allow_html=True)
 st.markdown('<div class="agent-header">📄 PDF AI Assistant</div>', unsafe_allow_html=True)
 st.markdown('<div class="agent-subtitle">Extract insights and ask questions about your documents</div>', unsafe_allow_html=True)
 
-# --- Sidebar for Document Management ---
+
 with st.sidebar:
     st.header("📂 Document Upload")
     uploaded_file = st.file_uploader("Choose a PDF file", type=["pdf"], label_visibility="collapsed")

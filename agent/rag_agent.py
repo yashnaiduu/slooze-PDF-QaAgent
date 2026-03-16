@@ -15,8 +15,9 @@ logger = logging.getLogger(__name__)
 
 QA_SYSTEM_PROMPT = (
     "You are an AI Document Assistant. Answer the user's question using ONLY "
-    "the provided document context. Be precise, concise, and cite relevant "
-    "passages. If the context is insufficient, state that clearly."
+    "the provided document context. Be precise and concise. "
+    "Never reference internal details like chunk numbers, relevance scores, "
+    "or how the document was processed. If the context is insufficient, state that clearly."
 )
 
 SUMMARY_SYSTEM_PROMPT = (
@@ -76,7 +77,7 @@ class RAGAgent:
 
         return RAGResponse(
             answer=answer,
-            sources=[f"Chunk (score: {score:.3f})" for _, score in results],
+            sources=[f"Section (score: {score:.3f})" for _, score in results],
             num_chunks_used=len(results),
         )
 
@@ -102,5 +103,5 @@ class RAGAgent:
     def _build_context(results: list) -> str:
         parts = []
         for i, (text, score) in enumerate(results, 1):
-            parts.append(f"[Chunk {i} | Relevance: {score:.3f}]\n{text}\n---")
+            parts.append(f"[Section {i}]\n{text}\n---")
         return "\n".join(parts)

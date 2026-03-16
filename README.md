@@ -2,6 +2,8 @@
 
 A production-grade RAG (Retrieval-Augmented Generation) agent — upload any PDF, ask questions, and get precise, context-grounded answers.
 
+![PDF QA Agent Demo](assets/demo.png)
+
 ## 🏗 Architecture
 
 - **Frontend:** Streamlit chat interface (`ui/app.py`)
